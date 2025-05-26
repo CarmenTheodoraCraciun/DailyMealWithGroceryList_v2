@@ -234,28 +234,30 @@
         <OutArgument x:TypeArguments="x:String">[htmlContent]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;html&gt;" &amp; 
-"&lt;head&gt;" &amp; 
-"&lt;meta charset='UTF-8'&gt;" &amp; 
-"&lt;link rel='stylesheet' href='style.css'&gt;" &amp; 
-"&lt;/head&gt;" &amp; 
-"&lt;body&gt;" &amp;  
-"&lt;form id='reteteForm' class='recipe-form'&gt;" &amp; 
- "&lt;h2 class='title'&gt;Rețete potrivite&lt;/h2&gt;" &amp;
-"&lt;div class='recipe-container'&gt;" &amp; 
+        <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;html&gt;" &amp;
+"&lt;head&gt;" &amp;
+"&lt;meta charset='UTF-8'&gt;" &amp;
+"&lt;title&gt;Daily Meal Planner&lt;/title&gt;" &amp;
+"&lt;link rel='icon' href='https://cdn1.iconfinder.com/data/icons/cartoon-snack/128/cookie-1024.png' type='image/png'&gt;" &amp; 
+"&lt;link rel='stylesheet' href='style.css'&gt;" &amp;
+"&lt;/head&gt;" &amp;
+"&lt;body&gt;" &amp;
+"&lt;form id='reteteForm' class='recipe-form'&gt;" &amp;
+"  &lt;h2 class='title'&gt;Rețete potrivite&lt;/h2&gt;" &amp;
+"&lt;div class='recipe-container'&gt;" &amp;
 String.Join("", recepeMatch.Select(Function(r) _
-  "&lt;div class='recipe-card'&gt;" &amp;
-  "&lt;label class='recipe-label'&gt;" &amp;
-  "&lt;input type='checkbox' name='reteta' value='" &amp; r("name").ToString() &amp; "' class='recipe-checkbox'&gt;" &amp;
-  "&lt;a href='" &amp; r("link").ToString() &amp; "' target='_blank' class='recipe-link'&gt;&lt;b&gt;" &amp; r("name").ToString() &amp; "&lt;/b&gt;&lt;/a&gt;&lt;br/&gt;" &amp;
-  "&lt;span class='recipe-time'&gt;🕒 " &amp; r("time").ToString() &amp; "&lt;/span&gt;&lt;br/&gt;" &amp;
-  "&lt;span class='recipe-ingredients'&gt;🥬 Ingrediente: " &amp;
-  String.Join("&lt;br/&gt;     - ", CType(r("ingredients"), Newtonsoft.Json.Linq.JArray).Select(Function(i) i.ToString().Replace("["c, "").Replace("]"c, "").Replace(""""c, "").Trim())) &amp; 
-  "&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;"
+"  &lt;div class='recipe-card'&gt;" &amp;
+"  &lt;label class='recipe-label'&gt;" &amp;
+"  &lt;input type='checkbox' name='reteta' value='" &amp; r("name").ToString() &amp; "' class='recipe-checkbox'&gt;" &amp;
+"  &lt;a href='" &amp; r("link").ToString() &amp; "' target='_blank' class='recipe-link'&gt;&lt;b&gt;" &amp; r("name").ToString() &amp; "&lt;/b&gt;&lt;/a&gt;&lt;br/&gt;" &amp;
+"  &lt;span class='recipe-time'&gt;🕒 " &amp; r("time").ToString() &amp; "&lt;/span&gt;&lt;br/&gt;" &amp;
+"  &lt;span class='recipe-ingredients'&gt;🥬 Ingrediente: " &amp;
+String.Join("&lt;br/&gt;      - ", CType(r("ingredients"), Newtonsoft.Json.Linq.JArray).Select(Function(i) i.ToString().Replace("["c, "").Replace("]"c, "").Replace(""""c, "").Trim())) &amp;
+"  &lt;/span&gt;&lt;/label&gt;&lt;/div&gt;"
 )) &amp;
-"&lt;/div&gt;" &amp;  
+"&lt;/div&gt;" &amp;
 "&lt;button type='button' onclick='salveaza()' class='export-button'&gt;Exportă ingredientele&lt;/button&gt;" &amp;
-"&lt;/form&gt;" &amp; 
+"&lt;/form&gt;" &amp;
 "&lt;script&gt;" &amp;
 "function salveaza() {" &amp;
 "  var selectate = [];" &amp;
@@ -264,7 +266,7 @@ String.Join("", recepeMatch.Select(Function(r) _
 "    var label = cb.parentElement;" &amp;
 "    var ingredienteText = label.textContent.split('🥬 Ingrediente:')[1].trim();" &amp;
 "    ingredienteText = ingredienteText.replace(/[[]]/g, '').replace(/""/g, '');" &amp;
-"    var ingredienteArray = ingredienteText.split(', ').map(function(i) { return '     - ' + i.trim(); }).join('\n');" &amp;
+"    var ingredienteArray = ingredienteText.split(', ').map(function(i) { return '      - ' + i.trim(); }).join('\n');" &amp;
 "    var continut = 'Pentru ' + retetaNume + ':\n' + ingredienteArray;" &amp;
 "    selectate.push(continut);" &amp;
 "  });" &amp;
@@ -280,7 +282,7 @@ String.Join("", recepeMatch.Select(Function(r) _
       </Assign.Value>
     </Assign>
     <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="./showRecepies.html" sap:VirtualizedContainerService.HintSize="504,166.4" sap2010:WorkflowViewState.IdRef="WriteTextFile_2" Text="[htmlContent]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="System.Diagnostics.Process.Start(&quot;explorer.exe&quot;, &quot;E:\Files\Daily_Meal_Planner\retete.html&quot;)" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="504,188" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="System.Diagnostics.Process.Start(&quot;explorer.exe&quot;, &quot;E:\Files\DailyMealWithGroceryList_v2\showRecepies.html&quot;)" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="504,188" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:InvokeCode.Arguments>
