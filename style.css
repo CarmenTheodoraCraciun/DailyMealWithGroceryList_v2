@@ -1,0 +1,109 @@
+:root {
+  --bg-main: #1E1E1E;
+  --bg-card: #2C2C2C;
+  --border: #3D3D3D;
+  --accent-red: #E63946;
+  --accent-orange: #F4A261;
+  --accent-green: #81B29A;
+  --text-main: #FAFAFA;
+  --text-secondary: #CCCCCC;
+  --text-hint: #888888;
+  --bg-banner: #4B2E2B;
+}
+
+
+/* Stiluri generale */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Titlul paginii */
+h2.title {
+    color: var(--accent-red);
+    font-size: 28px;
+}
+
+/* Container pentru carduri */
+.recipe-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+/* Cardurile rețetelor */
+.recipe-card {
+    background-color: var(--bg-card);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: relative;
+}
+
+/* Efect de hover pe card */
+.recipe-card:hover {
+    transform: scale(1.05);
+}
+
+/* Titlul cardului */
+.recipe-card .recipe-link {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--accent-orange);
+    text-decoration: none;
+}
+
+/* Ingredientele (subtitlu) */
+.recipe-card .recipe-ingredients {
+    color: var(--accent-green);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Timpul de preparare */
+.recipe-card .recipe-time {
+    color: var(--accent-red);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Stil pentru checkbox */
+.recipe-checkbox {
+    margin-right: 10px;
+}
+
+/* Buton de export */
+.export-button {
+    background-color: var(--accent-red);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 30px;
+}
+
+.export-button:hover {
+    background-color: var(--accent-orange);
+}
+
+.recipe-checkbox {
+    accent-color: var(--accent-orange);
+    width: 18px;
+    height: 18px;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
