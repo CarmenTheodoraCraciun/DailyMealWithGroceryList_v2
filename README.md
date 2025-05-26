@@ -1,7 +1,7 @@
-# Daily Meal with Grocery List v2
+# Daily Meal with Grocery List
 
 ## Project Description
-DailyMealWithGroceryList_v2 is an automation project designed to streamline meal planning and grocery list generation. It automates the process of fetching recipe data, checking for updates, and assisting users in planning meals based on available ingredients, ultimately generating a personalized list of recipes and their ingredients.
+DailyMealWithGroceryList is an automation project designed to streamline meal planning and grocery list generation. It automates the process of fetching recipe data, checking for updates, and assisting users in planning meals based on available ingredients, ultimately generating a personalized list of recipes and their ingredients.
 
 ## Workflows and Features
 This project consists of three main automation workflows:
@@ -75,5 +75,8 @@ Run the ```Main.xaml``` workflow:
 * The ```MealPlanner.xaml``` will then guide you to input your ingredients.
 
 ## Review the output:
-* An HTML file ```meal_plan.html``` will be generated with your personalized meal plan.
+* An HTML file ```showRecepies.html``` will be generated with your personalized meal plan.
 * Open this file in your web browser to view and interact with it.
+
+* ![image](https://github.com/user-attachments/assets/9f929024-99a8-4520-8c75-e8c8885e455b)
+
