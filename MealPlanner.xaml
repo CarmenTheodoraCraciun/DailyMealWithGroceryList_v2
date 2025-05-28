@@ -112,7 +112,7 @@
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="871.6,2086.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="885.6000000000001,2365.6000000000004" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="htmlContent" />
       <Variable x:TypeArguments="x:String" Name="output" />
@@ -130,6 +130,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </Variable>
+      <Variable x:TypeArguments="x:String" Name="userIngredientsRaw" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -141,6 +142,7 @@
         <OutArgument x:TypeArguments="x:String">[ingredients]</OutArgument>
       </ui:InputDialog.Result>
     </ui:InputDialog>
+    <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="./userIngredients.txt" sap:VirtualizedContainerService.HintSize="504,166.4" sap2010:WorkflowViewState.IdRef="WriteTextFile_3" Text="[ingredients]" />
     <Assign sap:VirtualizedContainerService.HintSize="504,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:List(x:String)">[userIngredients]</OutArgument>
@@ -229,60 +231,75 @@
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
+    <ui:ReadTextFile File="{x:Null}" Content="[userIngredientsRaw]" DisplayName="Read Text File" FileName="./userIngredients.txt" sap:VirtualizedContainerService.HintSize="504,112.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
     <Assign sap:VirtualizedContainerService.HintSize="504,115.2" sap2010:WorkflowViewState.IdRef="Assign_9">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[htmlContent]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;html&gt;" &amp;
-"&lt;head&gt;" &amp;
-"&lt;meta charset='UTF-8'&gt;" &amp;
-"&lt;title&gt;Daily Meal Planner&lt;/title&gt;" &amp;
-"&lt;link rel='icon' href='https://cdn1.iconfinder.com/data/icons/cartoon-snack/128/cookie-1024.png' type='image/png'&gt;" &amp; 
-"&lt;link rel='stylesheet' href='style.css'&gt;" &amp;
-"&lt;/head&gt;" &amp;
-"&lt;body&gt;" &amp;
-"&lt;form id='reteteForm' class='recipe-form'&gt;" &amp;
-"  &lt;h2 class='title'&gt;Rețete potrivite&lt;/h2&gt;" &amp;
-"&lt;div class='recipe-container'&gt;" &amp;
+        <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;html&gt;" &amp; _
+"&lt;head&gt;" &amp; _
+"&lt;meta charset='UTF-8'&gt;" &amp; _
+"&lt;title&gt;Daily Meal Planner&lt;/title&gt;" &amp; _
+"&lt;link rel='icon' href='https://cdn1.iconfinder.com/data/icons/cartoon-snack/128/cookie-1024.png' type='image/png'&gt;" &amp; _
+"&lt;link rel='stylesheet' href='style.css'&gt;" &amp; _
+"&lt;/head&gt;" &amp; _
+"&lt;body&gt;" &amp; _
+"&lt;form id='reteteForm' class='recipe-form'&gt;" &amp; _
+"&lt;h2 class='title'&gt;Rețete potrivite&lt;/h2&gt;" &amp; _
+"&lt;div class='recipe-container'&gt;" &amp; _
 String.Join("", recepeMatch.Select(Function(r) _
-"  &lt;div class='recipe-card'&gt;" &amp;
-"  &lt;label class='recipe-label'&gt;" &amp;
-"  &lt;input type='checkbox' name='reteta' value='" &amp; r("name").ToString() &amp; "' class='recipe-checkbox'&gt;" &amp;
-"  &lt;a href='" &amp; r("link").ToString() &amp; "' target='_blank' class='recipe-link'&gt;&lt;b&gt;" &amp; r("name").ToString() &amp; "&lt;/b&gt;&lt;/a&gt;&lt;br/&gt;" &amp;
-"  &lt;span class='recipe-time'&gt;🕒 " &amp; r("time").ToString() &amp; "&lt;/span&gt;&lt;br/&gt;" &amp;
-"  &lt;span class='recipe-ingredients'&gt;🥬 Ingrediente: " &amp;
-String.Join("&lt;br/&gt;      - ", CType(r("ingredients"), Newtonsoft.Json.Linq.JArray).Select(Function(i) i.ToString().Replace("["c, "").Replace("]"c, "").Replace(""""c, "").Trim())) &amp;
-"  &lt;/span&gt;&lt;/label&gt;&lt;/div&gt;"
-)) &amp;
-"&lt;/div&gt;" &amp;
-"&lt;button type='button' onclick='salveaza()' class='export-button'&gt;Exportă ingredientele&lt;/button&gt;" &amp;
-"&lt;/form&gt;" &amp;
-"&lt;script&gt;" &amp;
-"function salveaza() {" &amp;
-"  var selectate = [];" &amp;
-"  document.querySelectorAll('input[name=reteta]:checked').forEach(function(cb) {" &amp;
-"    var retetaNume = cb.value;" &amp;
-"    var label = cb.parentElement;" &amp;
-"    var ingredienteText = label.textContent.split('🥬 Ingrediente:')[1].trim();" &amp;
-"    ingredienteText = ingredienteText.replace(/[[]]/g, '').replace(/""/g, '');" &amp;
-"    var ingredienteArray = ingredienteText.split(', ').map(function(i) { return '      - ' + i.trim(); }).join('\n');" &amp;
-"    var continut = 'Pentru ' + retetaNume + ':\n' + ingredienteArray;" &amp;
-"    selectate.push(continut);" &amp;
-"  });" &amp;
-"  var blob = new Blob([selectate.join('\n\n')], {type: 'text/plain;charset=utf-8'});" &amp;
-"  var link = document.createElement('a');" &amp;
-"  link.href = URL.createObjectURL(blob);" &amp;
-"  link.download = 'retete_selectate.txt';" &amp;
-"  link.click();" &amp;
-"}" &amp;
-"&lt;/script&gt;" &amp;
-"&lt;/body&gt;" &amp;
+"  &lt;div class='recipe-card'&gt;" &amp; _
+"  &lt;label class='recipe-label'&gt;" &amp; _
+"  &lt;input type='checkbox' name='reteta' value='" &amp; r("name").ToString() &amp; "' class='recipe-checkbox'&gt;" &amp; _
+"  &lt;a href='" &amp; r("link").ToString() &amp; "' target='_blank' class='recipe-link'&gt;&lt;b&gt;" &amp; r("name").ToString() &amp; "&lt;/b&gt;&lt;/a&gt;&lt;br/&gt;" &amp; _
+"  &lt;span class='recipe-time'&gt;🕒 " &amp; r("time").ToString() &amp; "&lt;/span&gt;&lt;br/&gt;" &amp; _
+"  &lt;span class='recipe-ingredients'&gt;🥬 Ingrediente: " &amp; _
+String.Join(", ", CType(r("ingredients"), Newtonsoft.Json.Linq.JArray).Select(Function(i) i.ToString().Replace("["c, "").Replace("]"c, "").Replace(""""c, "").Trim())) &amp; _
+"&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;")) &amp; _
+"&lt;/div&gt;" &amp; _
+"&lt;button type='button' onclick='salveaza()' class='export-button'&gt;Exportă ingredientele&lt;/button&gt;" &amp; _
+"&lt;/form&gt;" &amp; _
+"&lt;script&gt;" &amp; _
+"document.addEventListener('DOMContentLoaded', function () {" &amp; _
+"  const rawIngredients = '" &amp; userIngredientsRaw.Replace("'", "\'").Replace(vbCrLf, "").Replace(vbLf, "") &amp; "';" &amp; _
+"  const userIngredients = rawIngredients.split(',').map(i =&gt; i.trim().toLowerCase()).filter(i =&gt; i);" &amp; _
+"  const recipeCards = Array.from(document.querySelectorAll('.recipe-card'));" &amp; _
+"  const scoredRecipes = recipeCards.map(card =&gt; {" &amp; _
+"    const ingredientsText = card.querySelector('.recipe-ingredients').textContent.toLowerCase();" &amp; _
+"    const recipeIngredients = ingredientsText.replace('🥬 ingrediente:', '').split(',').map(i =&gt; i.trim());" &amp; _
+"    const commonCount = userIngredients.filter(i =&gt; recipeIngredients.includes(i)).length;" &amp; _
+"    return { card, score: commonCount };" &amp; _
+"  });" &amp; _
+"  scoredRecipes.sort((a, b) =&gt; b.score - a.score);" &amp; _
+"  const container = document.querySelector('.recipe-container');" &amp; _
+"  container.innerHTML = '';" &amp; _
+"  scoredRecipes.forEach(item =&gt; container.appendChild(item.card));" &amp; _
+"});" &amp; _
+"function salveaza() {" &amp; _
+"  var selectate = [];" &amp; _
+"  document.querySelectorAll('input[name=reteta]:checked').forEach(function(cb) {" &amp; _
+"    var retetaNume = cb.value;" &amp; _
+"    var label = cb.parentElement;" &amp; _
+"    var ingredienteText = label.textContent.split('🥬 Ingrediente:')[1].trim();" &amp; _
+"    ingredienteText = ingredienteText.replace(/[[]]/g, '').replace(/\""/g, '');" &amp; _
+"    var ingredienteArray = ingredienteText.split(', ').map(function(i) { return '      - ' + i.trim(); }).join('\n');" &amp; _
+"    var continut = 'Pentru ' + retetaNume + ':\n' + ingredienteArray;" &amp; _
+"    selectate.push(continut);" &amp; _
+"  });" &amp; _
+"  var blob = new Blob([selectate.join('\n\n')], {type: 'text/plain;charset=utf-8'});" &amp; _
+"  var link = document.createElement('a');" &amp; _
+"  link.href = URL.createObjectURL(blob);" &amp; _
+"  link.download = 'retete_selectate.txt';" &amp; _
+"  link.click();" &amp; _
+"}" &amp; _
+"&lt;/script&gt;" &amp; _
+"&lt;/body&gt;" &amp; _
 "&lt;/html&gt;"]</InArgument>
       </Assign.Value>
     </Assign>
     <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="./showRecepies.html" sap:VirtualizedContainerService.HintSize="504,166.4" sap2010:WorkflowViewState.IdRef="WriteTextFile_2" Text="[htmlContent]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="System.Diagnostics.Process.Start(&quot;explorer.exe&quot;, &quot;E:\Files\DailyMealWithGroceryList_v2\showRecepies.html&quot;)" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="504,188" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="System.Diagnostics.Process.Start(&quot;explorer.exe&quot;, &quot;C:\Users\Codruta Alexandra\OneDrive\OneDrive - e-uvt.ro\Desktop\Licenta\FMI - ISR\RPA\DailyMealWithGroceryList\showRecepies.html&quot;)" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="504,188" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <scg:Dictionary x:TypeArguments="x:String, Argument" />
       </ui:InvokeCode.Arguments>

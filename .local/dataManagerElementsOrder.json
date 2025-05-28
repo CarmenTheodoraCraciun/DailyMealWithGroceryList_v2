@@ -11,27 +11,41 @@
     {
       "Path": "MealPlanner.xaml",
       "SortBy": 0,
-      "VariablesSectionElementsOrder": null,
-      "ArgumentsSectionElementsOrder": null,
-      "ConstantsSectionElementsOrder": null,
+      "VariablesSectionElementsOrder": [
+        "userIngredientsRaw&Sequence_1",
+        "htmlContent&Sequence_1",
+        "output&Sequence_1",
+        "x&Sequence_1",
+        "ingredientsRecepe&Sequence_1",
+        "recepeMatch&Sequence_1",
+        "jsonText&Sequence_1",
+        "ingredients&Sequence_1",
+        "userIngredients&Sequence_1",
+        "jsonObject&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
     },
     {
       "Path": null,
       "SortBy": 0,
-      "VariablesSectionElementsOrder": null,
+      "VariablesSectionElementsOrder": [],
       "ArgumentsSectionElementsOrder": null,
-      "ConstantsSectionElementsOrder": null,
+      "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
     },
     {
       "Path": "Main.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
-        "userChoice&Sequence_2"
+        "invokeGroceryList&Sequence_1",
+        "recepiesExists&Sequence_1",
+        "lastModifeRecepies&Sequence_1",
+        "userChoice&Sequence_1"
       ],
-      "ArgumentsSectionElementsOrder": null,
-      "ConstantsSectionElementsOrder": null,
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
     }
   ]
